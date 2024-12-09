@@ -5,6 +5,12 @@ import torch.utils.data as util_data
 import torch.nn as nn
 import tqdm
 import os
+SEMIBIN_DIRECTORY = r"C:\Users\Lenovo\Datalogi\SEM9_2\SemiBin2_without_abundance\SemiBin"
+import sys
+sys.path.append(SEMIBIN_DIRECTORY)
+import generate_kmer
+import main
+
 
 from scipy.optimize import linear_sum_assignment
 
@@ -23,6 +29,7 @@ def get_embedding(dna_sequences,
         "dnabert2": "dnabert2_new.npy",
         "nt": "nt.npy",
         "test": "test.npy",
+        "sb2": "data.csv"
     }
     
     model2batch_size = {
@@ -72,6 +79,8 @@ def get_embedding(dna_sequences,
                                                 model_name_or_path=test_model_dir, 
                                                 model_max_length=5000,
                                                 batch_size=batch_size,)
+        elif model == "sb2":
+            embedding = calculate_sb2(dna_sequences)
         else:
             raise ValueError(f"Unknown model {model}")
         
@@ -82,6 +91,11 @@ def get_embedding(dna_sequences,
         
     return embedding
 
+def calculate_sb2(data_path, model_path):
+    feats = main.generate_kmer_features_from_fasta(data_path, 2500, 4, split=False, split_threshold=0)
+    embeddings = main.get_embedding(model_path, feats)
+    return embeddings
+    
 
 def calculate_tnf(dna_sequences, kernel=False):
     # Define all possible tetra-nucleotides
@@ -120,6 +134,7 @@ def calculate_tnf(dna_sequences, kernel=False):
         embedding = np.dot(embedding, kernel)
         
     return embedding
+
 
 
 def calculate_dna2vec_embedding(dna_sequences, embedding_dir):

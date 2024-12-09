@@ -7,6 +7,11 @@ import collections
 import numpy as np
 import sklearn.metrics
 
+SEMIBIN_DIRECTORY = r"C:\Users\Lenovo\Datalogi\SEM9_2\SemiBin2_without_abundance\SemiBin"
+import sys
+sys.path.append(SEMIBIN_DIRECTORY)
+import generate_kmer
+
 
 from utils import get_embedding, KMedoid, align_labels_via_hungarian_algorithm, compute_class_center_medium_similarity
 
@@ -28,7 +33,6 @@ def main(args):
                 with open(clustering_data_file, "r") as f:
                     reader = csv.reader(f, delimiter="\t")
                     data = list(reader)[1:]
-                
                 dna_sequences = [d[0][:max_length] for d in data]
                 labels = [d[1] for d in data]
                 
@@ -43,8 +47,6 @@ def main(args):
                 percentile_values = compute_class_center_medium_similarity(embedding, labels)
                 threshold = percentile_values[-3]
                 print(f"threshold: {threshold}")
-                
-                
                 
                 ###### load binning data
                 data_file =  os.path.join(args.data_dir, species, f"binning_{sample}.tsv")
