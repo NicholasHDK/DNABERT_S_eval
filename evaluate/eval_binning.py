@@ -24,8 +24,10 @@ max_length = 20000
 def main(args):
     model_list = args.model_list.split(",")
     for model in model_list:
-        for species in ["reference", "marine", "plant"]:
-            for sample in ["5", "6"]:
+        #for species in ["reference", "marine", "plant"]:
+        for species in ["plant"]:
+            #for sample in ["5", "6"]:
+            for sample in ["6"]:
 
                 print(f"Start {model} {species} {sample} binning")
                 
