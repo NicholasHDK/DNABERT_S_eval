@@ -29,7 +29,7 @@ def get_embedding(dna_sequences,
         "dnabert2": "dnabert2_new.npy",
         "nt": "nt.npy",
         "test": "test.npy",
-        "sb2": "data.csv"
+        "sb2": "embeddings.npy"
     }
     
     model2batch_size = {
@@ -40,6 +40,7 @@ def get_embedding(dna_sequences,
         "dnabert2": 20,
         "nt": 64,
         "test": 20,
+        "sb2": 10,
     }
     batch_size = model2batch_size[model]
     
@@ -92,6 +93,7 @@ def get_embedding(dna_sequences,
     return embedding
 
 def calculate_sb2(data_path, model_path):
+    print("NICH: In utils/calculate_sb2")
     feats = main.generate_kmer_features_from_fasta(data_path, 2500, 4, split=False, split_threshold=0)
     embeddings = main.get_embedding(model_path, feats)
     return embeddings

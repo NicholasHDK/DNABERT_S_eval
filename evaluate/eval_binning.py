@@ -41,9 +41,10 @@ def main(args):
                 labels = np.array([label2id[l] for l in labels])
                 num_clusters = len(label2id)
                 print(f"Get {len(dna_sequences)} sequences, {num_clusters} clusters for")   
-
+                embeddings = np.load("~/sb2/SemiBin2_without_abundance/outputs_plant6_cluster/embeddings.npy")
                 # generate embedding
-                embedding = normalize(get_embedding(dna_sequences, model, species, 0, task_name="clustering", test_model_dir=args.test_model_dir))
+                #embedding = normalize(get_embedding(dna_sequences, model, species, 0, task_name="clustering", test_model_dir=args.test_model_dir))
+                embedding = normalize(embeddings)
                 percentile_values = compute_class_center_medium_similarity(embedding, labels)
                 threshold = percentile_values[-3]
                 print(f"threshold: {threshold}")
@@ -76,8 +77,10 @@ def main(args):
                 print(f"Get {len(dna_sequences)} sequences, {num_clusters} clusters")   
 
                 # generate embedding
-                embedding = get_embedding(dna_sequences, model, species, sample, task_name="binning")
+                #embedding = get_embedding(dna_sequences, model, species, sample, task_name="binning")
+                embedding = np.load("~/sb2/SemiBin2_without_abundance/outputs_plant6/embeddings.npy")
                 if len(embedding) > len(filterd_idx):
+                    print("NICH: Filtering embeddings by idx, might be dangerous")
                     embedding = embedding[np.array(filterd_idx)]
                 embedding_norm = normalize(embedding)
                 # percentile_values = compute_within_class_similarity(embedding_norm, labels_bin)
