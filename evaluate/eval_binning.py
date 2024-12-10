@@ -7,7 +7,8 @@ import collections
 import numpy as np
 import sklearn.metrics
 
-SEMIBIN_DIRECTORY = r"~/sb2/SemiBin2_without_abundance/SemiBin"
+SEMIBIN_DIRECTORY = os.path.expanduser("~/sb2/SemiBin2_without_abundance/SemiBin")
+
 import sys
 sys.path.append(SEMIBIN_DIRECTORY)
 import generate_kmer
