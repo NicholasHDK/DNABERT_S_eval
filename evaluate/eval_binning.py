@@ -44,7 +44,7 @@ def main(args):
                 labels = np.array([label2id[l] for l in labels])
                 num_clusters = len(label2id)
                 print(f"Get {len(dna_sequences)} sequences, {num_clusters} clusters for")   
-                embeddings = np.load("~/sb2/SemiBin2_without_abundance/outputs_plant6_cluster/embeddings.npy")
+                embeddings = np.load(os.path.expanduser("~/sb2/SemiBin2_without_abundance/outputs_plant6_cluster/embeddings.npy"))
                 # generate embedding
                 #embedding = normalize(get_embedding(dna_sequences, model, species, 0, task_name="clustering", test_model_dir=args.test_model_dir))
                 embedding = normalize(embeddings)
@@ -81,7 +81,7 @@ def main(args):
 
                 # generate embedding
                 #embedding = get_embedding(dna_sequences, model, species, sample, task_name="binning")
-                embedding = np.load("~/sb2/SemiBin2_without_abundance/outputs_plant6/embeddings.npy")
+                embedding = np.load(os.path.expanduser("~/sb2/SemiBin2_without_abundance/outputs_plant6/embeddings.npy"))
                 if len(embedding) > len(filterd_idx):
                     print("NICH: Filtering embeddings by idx, might be dangerous")
                     embedding = embedding[np.array(filterd_idx)]
