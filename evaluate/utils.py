@@ -6,7 +6,7 @@ import torch.nn as nn
 import tqdm
 import os
 SEMIBIN_DIRECTORY = os.path.expanduser("~/sb2/SemiBin2_without_abundance/SemiBin")
-
+print(os.path.isfile(os.path.join(SEMIBIN_DIRECTORY, 'generate_kmer.py')))
 import sys
 sys.path.append(SEMIBIN_DIRECTORY)
 import generate_kmer
