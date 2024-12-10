@@ -5,12 +5,11 @@ import torch.utils.data as util_data
 import torch.nn as nn
 import tqdm
 import os
-SEMIBIN_DIRECTORY = os.path.expanduser("~/sb2/SemiBin2_without_abundance/SemiBin")
-print(os.path.isfile(os.path.join(SEMIBIN_DIRECTORY, 'generate_kmer.py')))
+SEMIBIN_DIRECTORY = os.path.expanduser("~/sb2/SemiBin2_without_abundance")
 import sys
 sys.path.append(SEMIBIN_DIRECTORY)
-import generate_kmer
-import main
+from SemiBin import generate_kmer
+from SemiBin import main
 
 
 from scipy.optimize import linear_sum_assignment

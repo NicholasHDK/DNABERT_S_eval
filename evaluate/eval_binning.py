@@ -7,11 +7,11 @@ import collections
 import numpy as np
 import sklearn.metrics
 
-SEMIBIN_DIRECTORY = os.path.expanduser("~/sb2/SemiBin2_without_abundance/SemiBin")
+SEMIBIN_DIRECTORY = os.path.expanduser("~/sb2/SemiBin2_without_abundance")
 print(os.path.isfile(os.path.join(SEMIBIN_DIRECTORY, 'generate_kmer.py')))
 import sys
 sys.path.append(SEMIBIN_DIRECTORY)
-import generate_kmer
+from SemiBin import generate_kmer
 
 
 from utils import get_embedding, KMedoid, align_labels_via_hungarian_algorithm, compute_class_center_medium_similarity
